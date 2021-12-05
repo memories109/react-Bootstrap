@@ -6,6 +6,26 @@
   height: 40vmin;
   pointer-events: none;
 }
+.list {
+  margin-top: 30px;
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+body {
+  font-family: 'nanumsquare';;
+}
+.black-nav {
+  background: black;
+  width: 100%;
+  display: flex;
+  color: white;
+  padding: 20px;
+  font-weight: 600;
+  font-style: 20px;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
