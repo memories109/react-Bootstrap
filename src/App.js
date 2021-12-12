@@ -8,7 +8,9 @@ function App() {
 
   let [글제목 , 글제목변경] = useState(['서울','광주','강남','포항','창원']); 
   let posts = '강남 고기 맛집';
-  
+  let [modal, modalChange] = useState(false)
+
+
   let [count, countChange] = useState(0);
   function 함수 () {
     var newArray = [...글제목];
@@ -43,12 +45,18 @@ function App() {
       <hr/>
       </div>
       <div className="list">
-      <h4> {글제목[4]}</h4>
+      <h4> { 글제목[4]}</h4>
       <p>2월 18일 발행</p>
       <hr/>
       </div>
+
+      <button onClick = { ()=> {modalChange(!modal)}}>클릭</button>
+      {
+        modal === true 
+        ? <Modal></Modal>
+        : null
+      }
     
-    <Modal></Modal>
         
     </div>
   );
