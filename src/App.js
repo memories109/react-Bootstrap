@@ -11,11 +11,16 @@ function App() {
   let [modal, modalChange] = useState(false)
 
 
-  let [count, countChange] = useState(0);
+  let [count, countChange] = useState([0,0,0,0,0]);
   function 함수 () {
     var newArray = [...글제목];
     newArray.sort();
     글제목변경( newArray);
+  }
+  function fndata(param){
+    var newArray = [...count];
+    newArray[param] = newArray[param]+1;
+    countChange(newArray);
   }
 
   return (
@@ -24,31 +29,17 @@ function App() {
         <div>개발 Blog</div>
       </div>
       <button onClick={함수}>클릭</button>
-      <div className="list">
-      <h4> {글제목[0]} <span onClick={()=>{ countChange(count+1) }}>👍</span>{count}</h4>
-      <p>2월 18일 발행</p>
-      <hr/>
-      </div>
-      <div className="list">
-      <h4> {글제목[1]}</h4>
-      <p>2월 18일 발행</p>
-      <hr/>
-      </div>
-      <div className="list">
-      <h4> {글제목[2]}</h4>
-      <p>2월 18일 발행</p>
-      <hr/>
-      </div>
-      <div className="list">
-      <h4> {글제목[3]}</h4>
-      <p>2월 18일 발행</p>
-      <hr/>
-      </div>
-      <div className="list">
-      <h4> { 글제목[4]}</h4>
-      <p>2월 18일 발행</p>
-      <hr/>
-      </div>
+      {
+      글제목.map( (a,i)=> {
+        return (
+          <div className="list">
+          <h4 >{a} <span onClick={()=>{ fndata(i) }}>👍</span>{count[i]}</h4>
+          <p>2월 18일 발행</p>
+          <hr/>
+          </div>
+        )
+        })
+      }
 
       <button onClick = { ()=> {modalChange(!modal)}}>클릭</button>
       {
