@@ -22,6 +22,7 @@ function App() {
     newArray[param] = newArray[param]+1;
     countChange(newArray);
   }
+  let [inputData, inputDataChange] = useState('');
   let [누른제목, 누른제목변경] = useState(0);
   return (
     <div className="App">
@@ -29,10 +30,11 @@ function App() {
         <div>개발 Blog</div>
       </div>
       <button onClick={함수}>클릭</button>
+
       {
       글제목.map( (a,i)=> {
         return (
-          <div className="list">
+          <div className="list" key={i}>
           <h4 onClick={ ()=> { 누른제목변경(i)}} >{a} <span onClick={()=>{ fndata(i) }}>👍</span>{count[i]}</h4>
           <p>2월 18일 발행</p>
           <hr/>
@@ -40,7 +42,15 @@ function App() {
         )
         })
       }
+      <div className="public">
+        <input onChange= { (e)=> { inputDataChange(e.target.value)}}/>  
+        <button onClick ={  ()=> {
+          var arrycopy = [...글제목, inputData];
+          글제목변경(arrycopy) ;
 
+        } }>저장</button>
+      </div>
+      
       <button onClick = { ()=> {modalChange(!modal)}}>클릭</button>
       {
         modal === true 

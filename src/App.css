@@ -12,7 +12,23 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+.publish {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
+.public input {
+  padding: 10px;
+  font-style: 16px;
+  border-radius: 5px;
+  width: 80%;
+  border: 1px solid gray;
+}
+.public button{
+  display: block;;
+  margin: auto;
+  margin-top: 10px;
+}
 .modal {
   margin-top: 20px;
   padding: 20px;
