@@ -6,12 +6,14 @@ import './App.css';
 
 function App() {
 
-  let [글제목 , 글제목변경] = useState(['남자 코트 추천','강남 우동 맛집','강남 헬스장']); 
+  let [글제목 , 글제목변경] = useState(['서울','광주','강남','포항','창원']); 
   let posts = '강남 고기 맛집';
   
   let [count, countChange] = useState(0);
   function 함수 () {
-    글제목변경(['여자 코트 변경', '여자 코트 변경', '여자 코트 변경 ']);
+    var newArray = [...글제목];
+    newArray.sort();
+    글제목변경( newArray);
   }
 
   return (
@@ -32,6 +34,16 @@ function App() {
       </div>
       <div className="list">
       <h4> {글제목[2]}</h4>
+      <p>2월 18일 발행</p>
+      <hr/>
+      </div>
+      <div className="list">
+      <h4> {글제목[3]}</h4>
+      <p>2월 18일 발행</p>
+      <hr/>
+      </div>
+      <div className="list">
+      <h4> {글제목[4]}</h4>
       <p>2월 18일 발행</p>
       <hr/>
       </div>
