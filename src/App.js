@@ -22,7 +22,7 @@ function App() {
     newArray[param] = newArray[param]+1;
     countChange(newArray);
   }
-
+  let [누른제목, 누른제목변경] = useState(0);
   return (
     <div className="App">
       <div className="black-nav">
@@ -33,7 +33,7 @@ function App() {
       글제목.map( (a,i)=> {
         return (
           <div className="list">
-          <h4 >{a} <span onClick={()=>{ fndata(i) }}>👍</span>{count[i]}</h4>
+          <h4 onClick={ ()=> { 누른제목변경(i)}} >{a} <span onClick={()=>{ fndata(i) }}>👍</span>{count[i]}</h4>
           <p>2월 18일 발행</p>
           <hr/>
           </div>
@@ -44,7 +44,7 @@ function App() {
       <button onClick = { ()=> {modalChange(!modal)}}>클릭</button>
       {
         modal === true 
-        ? <Modal></Modal>
+        ? <Modal 글제목={글제목} 누른제목={누른제목}></Modal>
         : null
       }
     
@@ -53,10 +53,10 @@ function App() {
   );
 }
 
-function Modal(){
+function Modal(props){
   return (
     <div className="modal">
-      <h2>제목</h2>
+      <h2>{props.글제목[props.누른제목]}</h2>
       <p>날짜</p>
       <p>상세내용</p>
     </div>  
