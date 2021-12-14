@@ -52,8 +52,8 @@ function App() {
       </Route>
     
 
-      <Route path="/detail">
-        <ModalDetail />
+      <Route path="/detail/:id">
+        <ModalDetail data={data}/>
       </Route>
       
       <Route path="/:id"> 
