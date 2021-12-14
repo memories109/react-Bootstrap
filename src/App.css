@@ -12,6 +12,16 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+.background {
+  background-image: url('./background.jpg');
+  background-size: cover;
+  color: white;
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+  padding: 3rem!important;
+  box-sizing: border-box;
+}
+
 .publish {
   margin-top: 30px;
   margin-bottom: 30px;
