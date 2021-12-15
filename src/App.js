@@ -2,75 +2,44 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import { Container, Navbar, Nav, NavDropdown  } from 'react-bootstrap';
 
 function App() {
 
-  let [글제목 , 글제목변경] = useState(['서울','광주','강남','포항','창원']); 
-  let posts = '강남 고기 맛집';
-  let [modal, modalChange] = useState(false)
-
-
-  let [count, countChange] = useState([0,0,0,0,0]);
-  function 함수 () {
-    var newArray = [...글제목];
-    newArray.sort();
-    글제목변경( newArray);
-  }
-  function fndata(param){
-    var newArray = [...count];
-    newArray[param] = newArray[param]+1;
-    countChange(newArray);
-  }
-  let [inputData, inputDataChange] = useState('');
-  let [누른제목, 누른제목변경] = useState(0);
+ 
   return (
     <div className="App">
-      <div className="black-nav">
-        <div>개발 Blog</div>
-      </div>
-      <button onClick={함수}>클릭</button>
-
-      {
-      글제목.map( (a,i)=> {
-        return (
-          <div className="list" key={i}>
-          <h4 onClick={ ()=> { 누른제목변경(i)}} >{a} <span onClick={()=>{ fndata(i) }}>👍</span>{count[i]}</h4>
-          <p>2월 18일 발행</p>
-          <hr/>
-          </div>
-        )
-        })
-      }
-      <div className="public">
-        <input onChange= { (e)=> { inputDataChange(e.target.value)}}/>  
-        <button onClick ={  ()=> {
-          var arrycopy = [...글제목, inputData];
-          글제목변경(arrycopy) ;
-
-        } }>저장</button>
-      </div>
-      
-      <button onClick = { ()=> {modalChange(!modal)}}>클릭</button>
-      {
-        modal === true 
-        ? <Modal 글제목={글제목} 누른제목={누른제목}></Modal>
-        : null
-      }
-    
-        
+     
+     <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#link">Link</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+     <div class="jumbotron">
+      <h1 class="display-4">Hello, world!</h1>
+      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      </p>
+    </div>
     </div>
   );
-}
-
-function Modal(props){
-  return (
-    <div className="modal">
-      <h2>{props.글제목[props.누른제목]}</h2>
-      <p>날짜</p>
-      <p>상세내용</p>
-    </div>  
-  )
 }
 
 
