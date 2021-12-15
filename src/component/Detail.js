@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory,useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
+let BoxStyled = styled.div`
+  padding : 20px;
+`;
+
+let TitleStyled = styled.h4`
+  font-size : 25px;
+  color : ${ props => props.color }
+`; 
 
 function ModalDetail(props) {
 
@@ -13,6 +22,9 @@ function ModalDetail(props) {
 
     return (
       <div className="container">
+        <BoxStyled>
+          <TitleStyled color={'blue'}>상세페이지</TitleStyled>
+        </BoxStyled>
         <div className="row">
           <div className="col-md-6">
             <img src={'https://codingapple1.github.io/shop/shoes'+(detailNum.id+1)+'.jpg'} width="100%"/>
