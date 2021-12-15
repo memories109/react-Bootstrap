@@ -34,7 +34,15 @@
   padding: 20px;
   background: #eee;
 }
-
+.background {
+  background-image: url('./background.jpg');
+  background-size: cover;
+  color: white;
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+  padding: 3rem!important;
+  box-sizing: border-box;
+}
 body {
   font-family: 'nanumsquare';;
 }
