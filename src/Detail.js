@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory,useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import './Detail.scss';
 
 let BoxStyled = styled.div`
   padding : 20px;
@@ -23,8 +24,11 @@ function ModalDetail(props) {
     return (
       <div className="container">
         <BoxStyled>
-          <TitleStyled color={'blue'}>상세페이지</TitleStyled>
+          <TitleStyled className="red">상세페이지</TitleStyled>
         </BoxStyled>
+        <div className='my-alert-yellow'> 
+          <p> 재고가 얼마 남지 않았습니다.</p>
+        </div>
         <div className="row">
           <div className="col-md-6">
             <img src={'https://codingapple1.github.io/shop/shoes'+(detailNum.id+1)+'.jpg'} width="100%"/>
