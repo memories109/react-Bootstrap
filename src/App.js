@@ -1,5 +1,5 @@
 /* eslint-disable */ 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Navbar, Container, Nav,  NavDropdown, Row,Col,img  } from 'react-bootstrap';
@@ -8,6 +8,7 @@ import ModalDetail from './Detail.js';
 import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
+let infoContext = React.createContext();
 
 
 function App() {
@@ -44,12 +45,13 @@ function App() {
         <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
       </div>
-
+      <infoContext.Provider value={info} >
       <div className="container" >
         <div className="row">
           <ModalList shoes={shoes}/>
         </div>
       </div>
+      </infoContext.Provider>
       <button className="btn btn-primary" onClick={ ()=> {
 
         // axios.post('서버URL', {id :'test',pw : 1234});
@@ -64,11 +66,11 @@ function App() {
         })
       }}>더보기</button>
       </Route>
+      
     
-
-      <Route path="/detail/:id">
-        <ModalDetail shoes={shoes} info={info} infoChange={infoChange} />
-      </Route>
+        <Route path="/detail/:id">
+          <ModalDetail shoes={shoes} info={info} infoChange={infoChange} />
+        </Route>
       
       <Route path="/:id"> 
         <div>아무거나 이거 보여주셈</div>
@@ -89,6 +91,9 @@ function App() {
 
 
 function ModalList (props){
+  
+  let info = useContext(infoContext);
+
   return (
     <div>
     {
@@ -98,6 +103,7 @@ function ModalList (props){
                 <img src={'https://codingapple1.github.io/shop/shoes'+(i+1)+'.jpg'} width="100%"></img>
                 <h4>{props.shoes[i].title}</h4>
                 <p>{props.shoes[i].content}&{props.shoes[i].price}</p>
+                <p>{info[i]}</p>
               </div>
           )
         })
