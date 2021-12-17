@@ -3,21 +3,23 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Navbar, Container, Nav,  NavDropdown, Row,Col,img  } from 'react-bootstrap';
-import Data from './data.js';
+import Shoes from './data.js';
 import ModalDetail from './Detail.js';
 import { Link, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 function App() {
 
-  let [data, dataChange] = useState(Data);
+  let [shoes, shoesChange] = useState(Shoes);
+  let [info, infoChange] = useState([10,11,12]);
 
   return (
     <div className="App">
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Toy</Navbar.Brand>
+        <Navbar.Brand href="/">Toy</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -45,15 +47,27 @@ function App() {
 
       <div className="container" >
         <div className="row">
-          <ModalList data={data}/>
+          <ModalList shoes={shoes}/>
         </div>
       </div>
+      <button className="btn btn-primary" onClick={ ()=> {
 
+        // axios.post('서버URL', {id :'test',pw : 1234});
+
+        axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then( (result)=> {
+
+          shoesChange([...shoes, ...result.data]);
+        })
+        .catch( ()=> {
+          console.log('실패')
+        })
+      }}>더보기</button>
       </Route>
     
 
       <Route path="/detail/:id">
-        <ModalDetail data={data}/>
+        <ModalDetail shoes={shoes} info={info} infoChange={infoChange} />
       </Route>
       
       <Route path="/:id"> 
@@ -78,18 +92,17 @@ function ModalList (props){
   return (
     <div>
     {
-        props.data.map( (a,i)=> {
+        props.shoes.map( (a,i)=> {
           return (
               <div className="col-md-4" key={i}>
                 <img src={'https://codingapple1.github.io/shop/shoes'+(i+1)+'.jpg'} width="100%"></img>
-                <h4>{props.data[i].title}</h4>
-                <p>{props.data[i].content}&{props.data[i].price}</p>
+                <h4>{props.shoes[i].title}</h4>
+                <p>{props.shoes[i].content}&{props.shoes[i].price}</p>
               </div>
-              
-         
           )
         })
       }
+      
     </div>
   )
 }

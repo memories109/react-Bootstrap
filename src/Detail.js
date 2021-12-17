@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useHistory,useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
@@ -12,13 +13,42 @@ let TitleStyled = styled.h4`
   color : ${ props => props.color }
 `; 
 
-function ModalDetail(props) {
+// class Detail2 extends React.Component{
+//   componentDidMount(){
 
-    let {id} = useParams();
+//   }
+//   componentWillUnmount(){
+
+//   }
+// }
+
+
+
+
+function ModalDetail(props) {
+  let [play , playChange] = useState(true);
+  let {id} = useParams();
     let history = useHistory();
-    let detailNum = props.data.find( (a)=> {
+    let detailNum = props.shoes.find( (a)=> {
       return a.id == id;
     });
+    
+  let [sample, sampleChange] = useState('');
+
+    useEffect( ()=> {
+      // axios.get();
+
+      let timer = setTimeout( ()=> {
+        playChange(false);
+      }, 2000);
+      return ()=>{
+        clearTimeout(timer)
+      }
+
+    },[play]) ;
+  // },[]) ;
+    
+
     
 
     return (
@@ -26,9 +56,17 @@ function ModalDetail(props) {
         <BoxStyled>
           <TitleStyled className="red">상세페이지</TitleStyled>
         </BoxStyled>
-        <div className='my-alert-yellow'> 
-          <p> 재고가 얼마 남지 않았습니다.</p>
-        </div>
+        <input onChange={ (e)=> {
+          sampleChange(e.target.value)
+        } }/>
+        {
+          play === true
+          ?
+          <div className='my-alert-yellow'> 
+            <p> 재고가 얼마 남지 않았습니다.</p>
+          </div>
+          : null
+        }
         <div className="row">
           <div className="col-md-6">
             <img src={'https://codingapple1.github.io/shop/shoes'+(detailNum.id+1)+'.jpg'} width="100%"/>
@@ -38,7 +76,13 @@ function ModalDetail(props) {
           <h4 className="pt-5">{detailNum.title}</h4>
           <p>{detailNum.content}</p>
           <p>{detailNum.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+
+          <Info info={props.info}/>
+          <button className="btn btn-danger" onClick={ ()=> {
+            let newArray = [...props.info];
+            
+            props.infoChange(newArray);
+          }}>주문하기</button>
           <button className="btn btn-danger" onClick={ ()=> {
               history.goBack()
               // history.push('/')
@@ -48,5 +92,13 @@ function ModalDetail(props) {
       </div>
     )
   }
+
+function Info (props){
+  console.log(props);
+  return (
+    
+    <p>재고 : {props.info[0]}</p>
+  )
+}
 
   export default ModalDetail; 
