@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory,useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
+import {infoContext} from './App.js';
 
 let BoxStyled = styled.div`
   padding : 20px;
@@ -26,10 +27,12 @@ let TitleStyled = styled.h4`
 
 
 function ModalDetail(props) {
+  let info = useContext(infoContext)
+
   let [play , playChange] = useState(true);
   let {id} = useParams();
-    let history = useHistory();
-    let detailNum = props.shoes.find( (a)=> {
+  let history = useHistory();
+  let detailNum = props.shoes.find( (a)=> {
       return a.id == id;
     });
     
@@ -77,7 +80,7 @@ function ModalDetail(props) {
           <p>{detailNum.content}</p>
           <p>{detailNum.price}</p>
 
-          <Info info={props.info}/>
+          {/* <Info info={props.info}/> */}
           <button className="btn btn-danger" onClick={ ()=> {
             let newArray = [...props.info];
             

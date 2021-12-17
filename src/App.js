@@ -8,7 +8,7 @@ import ModalDetail from './Detail.js';
 import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 
-let infoContext = React.createContext();
+export let infoContext = React.createContext();
 
 
 function App() {
@@ -67,11 +67,11 @@ function App() {
       }}>더보기</button>
       </Route>
       
-    
+      <infoContext.Provider value={info} >
         <Route path="/detail/:id">
           <ModalDetail shoes={shoes} info={info} infoChange={infoChange} />
         </Route>
-      
+        </infoContext.Provider>
       <Route path="/:id"> 
         <div>아무거나 이거 보여주셈</div>
       </Route>
