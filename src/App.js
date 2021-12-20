@@ -7,6 +7,7 @@ import Shoes from './data.js';
 import ModalDetail from './Detail.js';
 import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import ModalCart from './Cart';
 
 export let infoContext = React.createContext();
 
@@ -76,6 +77,9 @@ function App() {
         <div>아무거나 이거 보여주셈</div>
       </Route>
       
+      <Route path="/cart">
+        <ModalCart></ModalCart>
+      </Route>
 
       <Route path="/test" component={ModalList}>
       </Route>

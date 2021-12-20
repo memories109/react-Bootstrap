@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory,useParams } from 'react-router-dom';
@@ -39,7 +40,7 @@ function ModalDetail(props) {
   let {id} = useParams();
   let history = useHistory();
   let detailNum = props.shoes.find( (a)=> {
-      return a.id == id;
+      return a.id === id;
     });
     
   let [sample, sampleChange] = useState('');
