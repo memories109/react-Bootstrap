@@ -4,6 +4,10 @@ import { useHistory,useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
 import {infoContext} from './App.js';
+import { Nav } from 'react-bootstrap';
+
+import {CSSTransition} from 'react-transition-group';
+
 
 let BoxStyled = styled.div`
   padding : 20px;
@@ -28,6 +32,8 @@ let TitleStyled = styled.h4`
 
 function ModalDetail(props) {
   let info = useContext(infoContext)
+  let [MultiTab, setMultiTab] = useState(0);
+  let [aniSwitch, setAniSwitch] = useState(false);
 
   let [play , playChange] = useState(true);
   let {id} = useParams();
@@ -92,9 +98,37 @@ function ModalDetail(props) {
           }}>뒤로가기</button>
           </div>
         </div>
+        
+        <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+          <Nav.Item>
+            <Nav.Link eventKey="link-0" onClick={ ()=> { setAniSwitch(false); setMultiTab(0)}}>Active</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="link-1" onClick={ ()=> { setAniSwitch(false); setMultiTab(1)}}>Active 2</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <CSSTransition in={aniSwitch} classNames="wow" timeout={500}>
+        <ModalTab MultiTab={MultiTab} setAniSwitch={setAniSwitch}/>
+        </CSSTransition>
+        
       </div>
     )
   }
+
+function ModalTab(props){
+
+  useEffect( ()=> {
+    props.setAniSwitch(true);
+  });
+
+  if(props.MultiTab === 0){
+    return <div>0000</div>
+  }else if(props.MultiTab === 1){
+    return <div>1111</div>
+  }else if(props.MultiTab === 2){
+    return <div>default</div>
+  }
+}
 
 function Info (props){
   console.log(props);
