@@ -6,9 +6,18 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-
+let alertConstructor = true;
+//Cart에서만 사용되는 reducer2는 사용안하고 Cart안에서 useState로 사용하도록 한다.
+function reducer2(state = alertConstructor, action){
+  if (action.type === 'close') {
+    state = false;
+    return  state;
+  }else {
+    return state
+  }
+}
 
 let basic = [
   {id : 0, name : '멋진신발0', quan : 2},
@@ -18,7 +27,12 @@ let basic = [
 ];
 
 function reducer(state = basic , action){
-  if (action.type === 'countup') {
+  if(action.type === 'withAdd'){
+    let copy = [...state];
+    copy.push(action.payload);
+    return copy
+  }else if (action.type === 'countup') {
+    
     let copy = [...state];
     copy[0].quan++;
     return copy
@@ -27,17 +41,14 @@ function reducer(state = basic , action){
     if(copy[0].quan > 0 ){
       copy[0].quan--;
     }
-    
-    
     return copy
   }else {
     
     return state
   }
-
 }
 
-let store = createStore( reducer );
+let store = createStore( combineReducers({reducer,reducer2}) );
 
 ReactDOM.render(
   <React.StrictMode>

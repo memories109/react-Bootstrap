@@ -32,10 +32,16 @@ function ModalCart(props){
                 
             </tbody>
             </Table>
-            <div className="my-alert2">
-                <p>지금 구매하시면 신규 할인 20%</p>
-            </div>
-            
+            {
+                props.alert === true
+                ?<div className="my-alert-yellow">
+                    <p>지금 구매하시면 신규 할인 20%</p>
+                    <button onClick ={ ()=> { 
+                        props.dispatch({type : 'close'})
+                    }}>닫기</button>
+                </div>
+                : null
+            }
         </div>
     )
 }
@@ -43,7 +49,8 @@ function ModalCart(props){
 function propsCart(state) {
     return {
         // cartName : state[0].name
-        state : state
+        state : state.reducer,
+        alert : state.reducer2
     }
 }
 

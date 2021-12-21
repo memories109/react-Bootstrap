@@ -8,7 +8,7 @@ import {infoContext} from './App.js';
 import { Nav } from 'react-bootstrap';
 
 import {CSSTransition} from 'react-transition-group';
-
+import { connect } from 'react-redux';
 
 let BoxStyled = styled.div`
   padding : 20px;
@@ -87,11 +87,13 @@ function ModalDetail(props) {
           <p>{detailNum.content}</p>
           <p>{detailNum.price}</p>
 
-          {/* <Info info={props.info}/> */}
+           <Info info={props.info}/>
           <button className="btn btn-danger" onClick={ ()=> {
             let newArray = [...props.info];
-            
             props.infoChange(newArray);
+
+            props.dispatch({type : 'withAdd', payload: {id : 2 , name : '새로운상품', quan: 1}});
+
           }}>주문하기</button>
           <button className="btn btn-danger" onClick={ ()=> {
               history.goBack()
@@ -132,11 +134,16 @@ function ModalTab(props){
 }
 
 function Info (props){
-  console.log(props);
   return (
-    
     <p>재고 : {props.info[0]}</p>
   )
 }
 
-  export default ModalDetail; 
+function propsDetail(state){
+  console.log(state);
+  return {
+    state : state.reducer
+  }
+}
+
+  export default connect(propsDetail)(ModalDetail); 
