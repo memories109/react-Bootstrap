@@ -93,7 +93,7 @@ function ModalDetail(props) {
             props.infoChange(newArray);
 
             props.dispatch({type : 'withAdd', payload: {id : 2 , name : '새로운상품', quan: 1}});
-
+            history.push('/cart');
           }}>주문하기</button>
           <button className="btn btn-danger" onClick={ ()=> {
               history.goBack()
