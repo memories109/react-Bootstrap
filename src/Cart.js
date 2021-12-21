@@ -1,8 +1,12 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 function ModalCart(props){
+
+    let state = useSelector( (state)=> state.reducer)
+    let dispatch = useDispatch();
+
     return (
         <div>
             <Table >
@@ -16,14 +20,14 @@ function ModalCart(props){
             </thead>
             <tbody>
                 {
-                props.state.map( (a, i)=>{
+                state.map( (a, i)=>{
                     return (
                     <tr key={i}>
                         <td>{a.id}</td>
                         <td>{a.name}</td>
                         <td>{a.quan}</td>
-                        <td><button onClick={ ()=>{ props.dispatch({type : 'countup'}) }}>+</button>
-                        <button onClick={ ()=>{ props.dispatch({type : 'countdown'}) }}>-</button></td>
+                        <td><button onClick={ ()=>{ dispatch({type : 'countup'}) }}>+</button>
+                        <button onClick={ ()=>{ dispatch({type : 'countdown'}) }}>-</button></td>
                     </tr>
                     )
                 })
@@ -46,13 +50,13 @@ function ModalCart(props){
     )
 }
 
-function propsCart(state) {
-    return {
-        // cartName : state[0].name
-        state : state.reducer,
-        alert : state.reducer2
-    }
-}
+// function propsCart(state) {
+//     return {
+//         // cartName : state[0].name
+//         state : state.reducer,
+//         alert : state.reducer2
+//     }
+// }
 
-export default connect(propsCart)(ModalCart)
-// export default ModalCart;
+// export default connect(propsCart)(ModalCart)
+export default ModalCart;
