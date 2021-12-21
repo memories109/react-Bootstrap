@@ -15,15 +15,27 @@ function ModalCart(props){
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>{props.state[0].id}</td>
-                <td>{props.state[0].name}</td>
-                <td>{props.state[0].quan}</td>
-                <td>@mdo</td>
-                </tr>
+                {
+                props.state.map( (a, i)=>{
+                    return (
+                    <tr key={i}>
+                        <td>{a.id}</td>
+                        <td>{a.name}</td>
+                        <td>{a.quan}</td>
+                        <td><button onClick={ ()=>{ props.dispatch({type : 'countup'}) }}>+</button>
+                        <button onClick={ ()=>{ props.dispatch({type : 'countdown'}) }}>-</button></td>
+                    </tr>
+                    )
+                })
+                }
+                
                 
             </tbody>
             </Table>
+            <div className="my-alert2">
+                <p>지금 구매하시면 신규 할인 20%</p>
+            </div>
+            
         </div>
     )
 }
