@@ -16,6 +16,8 @@ function App() {
 
   let [shoes, shoesChange] = useState(Shoes);
   let [info, infoChange] = useState([10,11,12]);
+  
+
 
   return (
     <div className="App">
@@ -67,19 +69,20 @@ function App() {
         })
       }}>더보기</button>
       </Route>
-      
+
+        
+      <Route path="/cart">
+        <ModalCart></ModalCart>
+      </Route>
+
       <infoContext.Provider value={info} >
         <Route path="/detail/:id">
           <ModalDetail shoes={shoes} info={info} infoChange={infoChange} />
         </Route>
-        </infoContext.Provider>
-      <Route path="/:id"> 
-        <div>아무거나 이거 보여주셈</div>
-      </Route>
-      
-      <Route path="/cart">
-        <ModalCart></ModalCart>
-      </Route>
+      </infoContext.Provider>
+
+     
+    
 
       <Route path="/test" component={ModalList}>
       </Route>

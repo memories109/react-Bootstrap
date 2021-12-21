@@ -39,8 +39,8 @@ function ModalDetail(props) {
   let [play , playChange] = useState(true);
   let {id} = useParams();
   let history = useHistory();
-  let detailNum = props.shoes.find( (a)=> {
-      return a.id === id;
+  let detailNum = props.shoes.find( (x)=> {
+      return x.id == id;
     });
     
   let [sample, sampleChange] = useState('');
