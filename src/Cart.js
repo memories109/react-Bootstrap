@@ -4,12 +4,12 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 
 function ModalCart(props){
 
-    let state = useSelector( (state)=> state.reducer)
-    let dispatch = useDispatch();
+    
+    
 
     return (
         <div>
-            <Table >
+            <Table > 
             <thead>
                 <tr>
                 <th>#</th>
